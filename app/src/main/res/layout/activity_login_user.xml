@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/textView_report"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginUser">
+
+    <TextView
+        android:id="@+id/textView_flood"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="27dp"
+        android:text="Flood"
+        android:textColor="@color/purple_500"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton_flood"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton_flood" />
+
+    <TextView
+        android:id="@+id/textView_earthquake"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="9dp"
+        android:text="earthquake"
+        android:textColor="@color/purple_500"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/imageButton_earthquake"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton_earthquake" />
+
+    <TextView
+        android:id="@+id/textView_tornado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="12dp"
+        android:text="Tornado"
+        android:textColor="@color/purple_500"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/imageButton_hurricane"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton_hurricane" />
+
+    <TextView
+        android:id="@+id/textView_something_else"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Something\n       else"
+        android:textColor="@color/purple_500"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/imageButton_something_else"
+        app:layout_constraintTop_toTopOf="@+id/textView_weather" />
+
+    <TextView
+        android:id="@+id/textView_weather"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="55dp"
+        android:text="Εxtreme \nweather \nconditions"
+        android:textColor="@color/purple_500"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton_weather" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="33dp"
+        android:text="Report an incident:"
+        android:textColor="@color/purple_500"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageButton_fire"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton_fire"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="271dp"
+        android:contentDescription="@string/Language"
+        android:scaleType="fitCenter"
+        android:src="@drawable/fire"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton_flood"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginBottom="271dp"
+        android:contentDescription="@string/Language"
+        android:scaleType="fitCenter"
+        android:src="@drawable/flood"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton_earthquake"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="268dp"
+        android:layout_marginBottom="271dp"
+        android:contentDescription="@string/Language"
+        android:scaleType="fitCenter"
+        android:src="@drawable/earthquake"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/imageButton_hurricane"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginEnd="19dp"
+        android:contentDescription="@string/Language"
+        android:scaleType="fitCenter"
+        android:src="@drawable/hurricane"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton_weather"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton_weather"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageButton_weather" />
+
+    <ImageButton
+        android:id="@+id/imageButton_weather"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="52dp"
+        android:contentDescription="@string/Language"
+        android:scaleType="fitCenter"
+        android:src="@drawable/weather"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_something_else"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton_something_else"
+        app:layout_constraintStart_toEndOf="@+id/imageButton_hurricane"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton_flood" />
+
+    <ImageButton
+        android:id="@+id/imageButton_something_else"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="43dp"
+        android:contentDescription="@string/Language"
+        android:scaleType="fitCenter"
+        android:src="@drawable/something_else"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton_weather"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageButton_weather"
+        app:layout_constraintTop_toTopOf="@+id/imageButton_weather" />
+
+    <TextView
+        android:id="@+id/textView_fire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="9dp"
+        android:text="Fire"
+        android:textColor="@color/purple_500"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/imageButton_fire"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton_fire" />
+
+    <TextView
+        android:id="@+id/textView_Welcomeback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="Welcome User"
+        android:textColor="@color/purple_500"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

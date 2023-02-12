@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".Register">
+
+    <EditText
+        android:id="@+id/text_Name"
+        android:layout_width="284dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginBottom="290dp"
+        android:ems="10"
+        android:hint="@string/username"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/text_Email"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginEnd="62dp"
+        android:layout_marginBottom="11dp"
+        android:ems="10"
+        android:hint="@string/e_mail"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/text_Phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_Name" />
+
+    <EditText
+        android:id="@+id/text_Phone"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginBottom="11dp"
+        android:ems="10"
+        android:hint="@string/phone_number"
+        android:inputType="phone"
+        app:layout_constraintBottom_toTopOf="@+id/text_PostAddress"
+        app:layout_constraintEnd_toEndOf="@+id/text_Password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_Email" />
+
+    <EditText
+        android:id="@+id/text_PostAddress"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginEnd="63dp"
+        android:layout_marginBottom="15dp"
+        android:ems="10"
+        android:hint="@string/post_address"
+        android:inputType="textPostalAddress"
+        app:layout_constraintBottom_toTopOf="@+id/text_Password"
+        app:layout_constraintEnd_toEndOf="@+id/text_Password"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_Phone" />
+
+    <EditText
+        android:id="@+id/text_Password"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="62dp"
+        android:layout_marginEnd="62dp"
+        android:layout_marginBottom="270dp"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:drawableRight="@drawable/ic_baseline_visibility_off_24"
+        android:longClickable="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_PostAddress" />
+
+
+    <Button
+        android:id="@+id/button_register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="58dp"
+        android:layout_marginBottom="169dp"
+        android:text="@string/confirm"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_Name" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
