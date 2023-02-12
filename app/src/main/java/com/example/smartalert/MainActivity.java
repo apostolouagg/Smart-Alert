@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(getResources().getString(R.string.app_name));
 
-        /*
+
         //Sign in Account
         button = (Button) findViewById(R.id.button_sign_in);
         button.setOnClickListener(new View.OnClickListener() {
@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
                 openLoginUser();
             }
         });
-        */
 
         //Open Registration
         button = (Button) findViewById(R.id.button_sign_up);
@@ -103,11 +102,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    /*
+
     //Load User Account
     public void openLoginUser(){
-        Intent intent = new Intent(this, Register.class);
+        Intent intent = new Intent(this, LoginUser.class);
         startActivity(intent);
     }
-     */
+
 }
