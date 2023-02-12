@@ -29,15 +29,6 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(getResources().getString(R.string.app_name));
 
-        Button button_lang = findViewById(R.id.button_language);
-        button_lang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //show AlertDialog to display list of languages, one can be selected
-                showChangeLanguageDialog();
-            }
-        });
-
         /*
         //Sign in Account
         button = (Button) findViewById(R.id.button_sign_in);
