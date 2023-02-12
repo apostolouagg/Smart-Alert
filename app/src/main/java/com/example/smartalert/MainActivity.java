@@ -18,14 +18,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    //eimai to main2
-<<<<<<< Updated upstream
-    //hdiuahwidha
-=======
-    //eimai 7654975673
->>>>>>> Stashed changes
-
-    //eimai to main 
+    
     private Button button;
 
     @Override
