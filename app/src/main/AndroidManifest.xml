@@ -13,6 +13,12 @@
         android:theme="@style/Theme.SmartAlert"
         tools:targetApi="31">
         <activity
+            android:name=".IncidentUser"
+            android:exported="false" />
+        <activity
+            android:name=".LoginEmployer"
+            android:exported="false" />
+        <activity
             android:name=".LoginUser"
             android:exported="false">
             <meta-data

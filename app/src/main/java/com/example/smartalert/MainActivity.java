@@ -12,6 +12,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -20,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
 
     
     private Button button;
+    private EditText editText_username;
+    private EditText editText_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,22 +34,34 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(getResources().getString(R.string.app_name));
 
-
         //Sign in Account
+
+        editText_username = (EditText) findViewById(R.id.text_username);
+        editText_password = (EditText) findViewById(R.id.text_password);
+
         button = (Button) findViewById(R.id.button_sign_in);
+        Intent intent = new Intent(this, LoginUser.class);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openLoginUser();
+
+                if(editText_username.getText().toString().trim().isEmpty() || editText_password.getText().toString().trim().isEmpty()){
+                    Toast.makeText(MainActivity.this, "To log in please fill the fields",Toast.LENGTH_LONG).show();
+                }else{
+                    startActivity(intent);
+                }
             }
         });
 
         //Open Registration
+
         button = (Button) findViewById(R.id.button_sign_up);
+        Intent intent2 = new Intent(this, Register.class);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openRegister();
+                startActivity(intent2);
             }
         });
     }
@@ -96,18 +112,5 @@ public class MainActivity extends AppCompatActivity {
         setlocale(language);
     }
 
-
-    //Load Register
-    public void openRegister(){
-        Intent intent = new Intent(this, Register.class);
-        startActivity(intent);
-    }
-
-
-    //Load User Account
-    public void openLoginUser(){
-        Intent intent = new Intent(this, LoginUser.class);
-        startActivity(intent);
-    }
 
 }
