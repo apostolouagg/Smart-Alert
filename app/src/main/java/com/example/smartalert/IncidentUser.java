@@ -2,23 +2,29 @@ package com.example.smartalert;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
 
 public class IncidentUser extends AppCompatActivity {
 
-    public TextView textView;
+    //FusedLocationProviderClient fusedLocationProviderClient;
+    public TextView textView, address, latitude, longitude, date, time;
+    public static final int REQUEST_CODE = 100;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_incident_user);
 
-        textView = (TextView) findViewById(R.id.textView_Report);
+        //Transfer DATA from LoginUser class
+        textView = (TextView) findViewById(R.id.textView3);
 
-        //String text = getIntent().getExtras().toString("fire");
+        Intent incindentUser = getIntent();
+        String text = incindentUser.getStringExtra("incident");
+        textView.setText(text);
 
-        //text.setText(text);
     }
 }

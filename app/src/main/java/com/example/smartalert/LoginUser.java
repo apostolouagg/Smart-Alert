@@ -7,57 +7,108 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoginUser extends AppCompatActivity {
 
-    public ImageButton imageButton;
+    public ImageButton b1, b2, b3, b4, b5, b6;
     public TextView one, two, three, four, five, six;
-    Intent intent = new Intent(this, IncidentUser.class);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_user);
 
-        imageButton = (ImageButton) findViewById(R.id.imageButton_fire);
-        imageButton = (ImageButton) findViewById(R.id.imageButton_earthquake);
-        imageButton = (ImageButton) findViewById(R.id.imageButton_flood);
-        imageButton = (ImageButton) findViewById(R.id.imageButton_hurricane);
-        imageButton = (ImageButton) findViewById(R.id.imageButton_weather);
-        imageButton = (ImageButton) findViewById(R.id.imageButton_something_else);
+        b1 = (ImageButton) findViewById(R.id.imageButton_fire);
+        b2 = (ImageButton) findViewById(R.id.imageButton_flood);
+        b3 = (ImageButton) findViewById(R.id.imageButton_earthquake);
+        b4 = (ImageButton) findViewById(R.id.imageButton_hurricane);
+        b5 = (ImageButton) findViewById(R.id.imageButton_weather);
+        b6 = (ImageButton) findViewById(R.id.imageButton_something_else);
 
         one = (TextView) findViewById(R.id.textView_fire);
-        two = (TextView) findViewById(R.id.textView_earthquake);
-        three = (TextView) findViewById(R.id.textView_flood);
+        two = (TextView) findViewById(R.id.textView_flood);
+        three = (TextView) findViewById(R.id.textView_earthquake);
         four = (TextView) findViewById(R.id.textView_tornado);
         five = (TextView) findViewById(R.id.textView_weather);
         six = (TextView) findViewById(R.id.textView_something_else);
 
-    }
-    public class ChooseImageButton implements View.OnClickListener{
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()){
-                case R.id.imageButton_fire:
-                    //intent.putExtra("fire",one.getText().toString());
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                b1.setSelected(!b1.isSelected());
+                String incident = one.getText().toString().trim();
+                if (b1.isSelected()) {
+                    Intent intent = new Intent(LoginUser.this, IncidentUser.class);
+                    intent.putExtra("incident", incident);
                     startActivity(intent);
-                    break;
-                case R.id.imageButton_earthquake:
-                    startActivity(intent);
-                    break;
-                case R.id.imageButton_flood:
-                    startActivity(intent);
-                    break;
-                case R.id.imageButton_hurricane:
-                    startActivity(intent);
-                    break;
-                case R.id.imageButton_weather:
-                    startActivity(intent);
-                    break;
-                case R.id.imageButton_something_else:
-                    startActivity(intent);
-                    break;
+                }
             }
+        });
 
-        }
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                b2.setSelected(!b2.isSelected());
+                String incident = two.getText().toString().trim();
+                if(b2.isSelected()){
+                    Intent intent = new Intent(LoginUser.this, IncidentUser.class);
+                    intent.putExtra("incident", incident);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        b3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                b3.setSelected(!b3.isSelected());
+                String incident = three.getText().toString().trim();
+                if(b3.isSelected()){
+                    Intent intent = new Intent(LoginUser.this, IncidentUser.class);
+                    intent.putExtra("incident", incident);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        b4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                b4.setSelected(!b4.isSelected());
+                String incident = four.getText().toString().trim();
+                if(b4.isSelected()){
+                    Intent intent = new Intent(LoginUser.this, IncidentUser.class);
+                    intent.putExtra("incident", incident);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        b5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                b5.setSelected(!b5.isSelected());
+                String incident = five.getText().toString().trim();
+                if(b5.isSelected()){
+                    Intent intent = new Intent(LoginUser.this, IncidentUser.class);
+                    intent.putExtra("incident", incident);
+                    startActivity(intent);
+                }
+            }
+        });
+
+        b6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                b6.setSelected(!b6.isSelected());
+                String incident = six.getText().toString().trim();
+                if(b6.isSelected()){
+                    Intent intent = new Intent(LoginUser.this, IncidentUser.class);
+                    intent.putExtra("incident", incident);
+                    startActivity(intent);
+                }
+            }
+        });
     }
 }
