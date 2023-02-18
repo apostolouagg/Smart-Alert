@@ -10,6 +10,10 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,13 +31,16 @@ import com.google.android.gms.tasks.Task;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class IncidentUser extends AppCompatActivity {
     TextView textView, address, latitude, longitude, date, time;
     Calendar calendar;
     SimpleDateFormat simpleDateFormat, simpleDateFormat1;
-    String Date, Time;
+    String Date, Time ;
 
+    EditText description;
+    Button button;
     LocationManager locationManager;
     // initializing
     // FusedLocationProviderClient
@@ -42,7 +49,6 @@ public class IncidentUser extends AppCompatActivity {
 
     // Initializing other items
     // from layout file
-
     int PERMISSION_ID = 44;
 
     @Override
@@ -78,6 +84,23 @@ public class IncidentUser extends AppCompatActivity {
         simpleDateFormat1 = new SimpleDateFormat("HH:mm");
         Time= simpleDateFormat1.format(calendar.getTime());
         time.setText(Time);
+
+        //Check if edit text is empty, it's a required field
+        button = (Button) findViewById(R.id.button_Send);
+        description = (EditText) findViewById(R.id.editTextTextMultiLine_Description);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (description.getText().toString().trim().isEmpty()) {
+                    Toast.makeText(IncidentUser.this, "To send the message you must describe the incident",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(IncidentUser.this, "Message sent successfully!",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
     }
 
     @SuppressLint("MissingPermission")
@@ -101,6 +124,7 @@ public class IncidentUser extends AppCompatActivity {
                         } else {
                             latitude.setText(location.getLatitude() + "");
                             longitude.setText(location.getLongitude() + "");
+                            address.setText(getUserCountry(address.getContext()));
                         }
                     }
                 });
@@ -186,5 +210,24 @@ public class IncidentUser extends AppCompatActivity {
         if (checkPermissions()) {
             getLastLocation();
         }
+    }
+
+    //Get the user's country
+    public static String getUserCountry(Context context) {
+        try {
+            final TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            final String simCountry = tm.getNetworkCountryIso();
+            if (simCountry != null && simCountry.length() == 2) { // SIM country code is available
+                return simCountry.toLowerCase(Locale.US);
+            }
+            else if (tm.getPhoneType() != TelephonyManager.PHONE_TYPE_CDMA) { // device is not 3G (would be unreliable)
+                String networkCountry = tm.getNetworkCountryIso();
+                if (networkCountry != null && networkCountry.length() == 2) { // network country code is available
+                    return networkCountry.toLowerCase(Locale.US);
+                }
+            }
+        }
+        catch (Exception e) { }
+        return null;
     }
 }
