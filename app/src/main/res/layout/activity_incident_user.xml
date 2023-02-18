@@ -79,6 +79,7 @@
 
     <EditText
         android:id="@+id/editTextTextMultiLine_Description"
+        android:maxLength="40"
         android:layout_width="0dp"
         android:layout_height="51dp"
         android:layout_marginStart="28dp"

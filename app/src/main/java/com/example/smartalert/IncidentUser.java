@@ -29,11 +29,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class IncidentUser extends AppCompatActivity {
-    TextView textView, latitude, longitude, date, time;
-    Calendar calendar, calendar1;
+    TextView textView, address, latitude, longitude, date, time;
+    Calendar calendar;
     SimpleDateFormat simpleDateFormat, simpleDateFormat1;
     String Date, Time;
-
 
     LocationManager locationManager;
     // initializing
@@ -61,6 +60,7 @@ public class IncidentUser extends AppCompatActivity {
         //Receive user's timestamp
         latitude = (TextView) findViewById(R.id.textView_Latitude);
         longitude = (TextView) findViewById(R.id.textView_Longitude);
+        address =  (TextView) findViewById(R.id.textView_Address2);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
