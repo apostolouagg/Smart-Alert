@@ -1,7 +1,5 @@
 package com.example.smartalert;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,25 +10,26 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import java.util.regex.Pattern;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class Register extends AppCompatActivity {
 
     private EditText editText_username, editText_password, editText_email, editText_phone, editText_postAddress;
     private Button button_confirm;
     boolean passwordVisible;
-
+    FirebaseAuth firebaseAuth;
+    FirebaseDatabase database;
+    DatabaseReference reference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +47,10 @@ public class Register extends AppCompatActivity {
         editText_email.addTextChangedListener(logintextWatcher);
         editText_phone.addTextChangedListener(logintextWatcher);
         editText_postAddress.addTextChangedListener(logintextWatcher);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("message");
 
         editText_password.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -76,6 +79,7 @@ public class Register extends AppCompatActivity {
         });
     }
 
+    //Check the all the fields
     private TextWatcher logintextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -106,14 +110,32 @@ public class Register extends AppCompatActivity {
                 button_confirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        signUp();
                     }
                 });
             }
-
-
         }
         @Override
         public void afterTextChanged(Editable editable) {}
     };
+
+    //sign Up
+    private void signUp() {
+        firebaseAuth.createUserWithEmailAndPassword(editText_email.getText().toString(),editText_password.getText().toString())
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            showMessage("Success!","User authenticated");
+                        }else {
+                            showMessage("Error",task.getException().getLocalizedMessage());
+                        }
+                    }
+                });
+
+    }
+
+    void showMessage(String title, String message){
+        new AlertDialog.Builder(this).setTitle(title).setMessage(message).setCancelable(true).show();
+    }
 }

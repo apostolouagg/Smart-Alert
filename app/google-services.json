@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "969935478035",
+    "firebase_url": "https://smartalert-3d6d9-default-rtdb.firebaseio.com",
+    "project_id": "smartalert-3d6d9",
+    "storage_bucket": "smartalert-3d6d9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:969935478035:android:c3fef7a230f012a4fe0ee6",
+        "android_client_info": {
+          "package_name": "com.example.smartalert"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "969935478035-7t3olr85dsqoa1h0a1r0a8kfbfo3hj6c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC3iN4D-6wDDVsCHCka-l-I3vKx81sImdc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "969935478035-7t3olr85dsqoa1h0a1r0a8kfbfo3hj6c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
