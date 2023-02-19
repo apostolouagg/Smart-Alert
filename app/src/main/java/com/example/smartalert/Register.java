@@ -15,14 +15,19 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.regex.Pattern;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Register extends AppCompatActivity {
 
-    private EditText editText_username;
-    private EditText editText_password;
-    private EditText editText_email;
-    private EditText editText_phone;
-    private EditText editText_postAddress;
+    private EditText editText_username, editText_password, editText_email, editText_phone, editText_postAddress;
     private Button button_confirm;
     boolean passwordVisible;
 
@@ -71,11 +76,9 @@ public class Register extends AppCompatActivity {
         });
     }
 
-
     private TextWatcher logintextWatcher = new TextWatcher() {
         @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             String usernameInput = editText_username.getText().toString().trim();
@@ -100,16 +103,17 @@ public class Register extends AppCompatActivity {
                 editText_password.setError("Your password must be greater than 5 digits!");
             }
             else {
+                button_confirm.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
 
+                    }
+                });
             }
-            button_confirm.setEnabled(!usernameInput.isEmpty() && !passwordInput.isEmpty()
-                    && !emailInput.isEmpty() && !phoneInput.isEmpty() & !postAddressInput.isEmpty());
 
 
         }
         @Override
-        public void afterTextChanged(Editable editable) {
-        }
-        
+        public void afterTextChanged(Editable editable) {}
     };
 }
