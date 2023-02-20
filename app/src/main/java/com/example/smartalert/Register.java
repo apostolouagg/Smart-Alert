@@ -158,6 +158,7 @@ public class Register extends AppCompatActivity {
                 // data base reference will sends data to firebase.
                 databaseReference.setValue(userInfo);
 
+
                 // after adding this data we are showing toast message.
                 Toast.makeText(Register.this, "Registration completed successfully!", Toast.LENGTH_SHORT).show();
             }
