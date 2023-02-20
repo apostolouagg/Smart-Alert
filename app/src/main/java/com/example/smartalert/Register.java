@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -18,18 +19,31 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.database.ValueEventListener;
 
 public class Register extends AppCompatActivity {
 
     private EditText editText_username, editText_password, editText_email, editText_phone, editText_postAddress;
     private Button button_confirm;
     boolean passwordVisible;
-    FirebaseAuth firebaseAuth;
-    FirebaseDatabase database;
-    DatabaseReference reference;
+
+    // creating a variable for our
+    // Firebase Database.
+    FirebaseDatabase firebaseDatabase;
+
+    // creating a variable for our Database
+    // Reference for Firebase.
+    DatabaseReference databaseReference;
+
+    // creating a variable for
+    // our object class
+    UserInfo userInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,9 +62,17 @@ public class Register extends AppCompatActivity {
         editText_phone.addTextChangedListener(logintextWatcher);
         editText_postAddress.addTextChangedListener(logintextWatcher);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-        database = FirebaseDatabase.getInstance();
-        reference = database.getReference("message");
+
+        // below line is used to get the
+        // instance of our FIrebase database.
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
+        // below line is used to get reference for our database.
+        databaseReference = firebaseDatabase.getReference("Users");
+
+        // initializing our object
+        // class variable.
+        userInfo = new UserInfo();
 
         editText_password.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -110,7 +132,7 @@ public class Register extends AppCompatActivity {
                 button_confirm.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        signUp();
+                        signUp(usernameInput,emailInput,phoneInput,postAddressInput,passwordInput);
                     }
                 });
             }
@@ -120,22 +142,32 @@ public class Register extends AppCompatActivity {
     };
 
     //sign Up
-    private void signUp() {
-        firebaseAuth.createUserWithEmailAndPassword(editText_email.getText().toString(),editText_password.getText().toString())
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            showMessage("Success!","User authenticated");
-                        }else {
-                            showMessage("Error",task.getException().getLocalizedMessage());
-                        }
-                    }
-                });
+    private void signUp(String name, String email, String phone, String post, String password) {
+        userInfo.setUsername(name);
+        userInfo.setEmail(email);
+        userInfo.setPhone(phone);
+        userInfo.setPostAddress(post);
+        userInfo.setPassword(password);
+        // we are use add value event listener method
+        // which is called with database reference.
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                // inside the method of on Data change we are setting
+                // our object class to our database reference.
+                // data base reference will sends data to firebase.
+                databaseReference.setValue(userInfo);
 
-    }
+                // after adding this data we are showing toast message.
+                Toast.makeText(Register.this, "Registration completed successfully!", Toast.LENGTH_SHORT).show();
+            }
 
-    void showMessage(String title, String message){
-        new AlertDialog.Builder(this).setTitle(title).setMessage(message).setCancelable(true).show();
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // if the data is not added or it is cancelled then
+                // we are displaying a failure toast message.
+                Toast.makeText(Register.this, "Fail Registration" + error, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

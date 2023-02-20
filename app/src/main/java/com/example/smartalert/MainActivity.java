@@ -15,6 +15,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Locale;
 
 
@@ -22,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     
     private Button button;
     private EditText editText_username, editText_password;
+    FirebaseAuth mAuth;
+    FirebaseDatabase database;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,9 +50,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if(editText_username.getText().toString().trim().isEmpty() || editText_password.getText().toString().trim().isEmpty()){
+                String email = editText_username.getText().toString().trim();
+                String pass = editText_password.getText().toString().trim();
+                if(email.isEmpty() || pass.isEmpty()){
                     Toast.makeText(MainActivity.this, "To log in please fill the fields",Toast.LENGTH_LONG).show();
                 }else{
+                    signIn();
                     startActivity(intent);
                 }
             }
@@ -110,5 +120,18 @@ public class MainActivity extends AppCompatActivity {
         setlocale(language);
     }
 
-
+    //Sign in
+    public void signIn(){
+        mAuth.signInWithEmailAndPassword(editText_username.getText().toString(),editText_password.getText().toString())
+                .addOnCompleteListener((task)->{
+                    if(task.isSuccessful()){
+                        showMessage("Success!","Ok");
+                    }else {
+                        showMessage("Error",task.getException().getLocalizedMessage());
+                    }
+                });
+    }
+    void showMessage(String title, String message){
+        new AlertDialog.Builder(this).setTitle(title).setMessage(message).setCancelable(true).show();
+    }
 }
