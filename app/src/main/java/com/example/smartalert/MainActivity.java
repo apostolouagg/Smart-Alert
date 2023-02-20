@@ -19,11 +19,9 @@ import java.util.Locale;
 
 
 public class MainActivity extends AppCompatActivity {
-
     
     private Button button;
-    private EditText editText_username;
-    private EditText editText_password;
+    private EditText editText_username, editText_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
