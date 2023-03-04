@@ -26,12 +26,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 public class Register extends AppCompatActivity {
 
     private EditText editText_username, editText_password, editText_email, editText_phone, editText_postAddress;
     private Button button_confirm;
     boolean passwordVisible;
 
+    FirebaseAuth mAuth;
     // creating a variable for our
     // Firebase Database.
     FirebaseDatabase firebaseDatabase;
@@ -64,7 +67,7 @@ public class Register extends AppCompatActivity {
 
 
         // below line is used to get the
-        // instance of our FIrebase database.
+        // instance of our Firebase database.
         firebaseDatabase = FirebaseDatabase.getInstance();
 
         // below line is used to get reference for our database.
@@ -73,6 +76,8 @@ public class Register extends AppCompatActivity {
         // initializing our object
         // class variable.
         userInfo = new UserInfo();
+
+        mAuth = FirebaseAuth.getInstance();
 
         editText_password.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -148,27 +153,16 @@ public class Register extends AppCompatActivity {
         userInfo.setPhone(phone);
         userInfo.setPostAddress(post);
         userInfo.setPassword(password);
-        // we are use add value event listener method
+
         // which is called with database reference.
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // inside the method of on Data change we are setting
-                // our object class to our database reference.
-                // data base reference will sends data to firebase.
-                databaseReference.setValue(userInfo);
+        // get a reference to the "Users" node in the database
+        DatabaseReference usersRef = firebaseDatabase.getReference("Users");
+        // generate a new unique key for the user node using the push() method
+        String userId = usersRef.push().getKey();
+        // save the user data under the new key
+        usersRef.child(userId).setValue(userInfo);
 
+        Toast.makeText(Register.this, "Registration completed successfully!", Toast.LENGTH_SHORT).show();
 
-                // after adding this data we are showing toast message.
-                Toast.makeText(Register.this, "Registration completed successfully!", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // if the data is not added or it is cancelled then
-                // we are displaying a failure toast message.
-                Toast.makeText(Register.this, "Fail Registration" + error, Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }
