@@ -12,11 +12,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 public class Register extends AppCompatActivity {
 
@@ -144,15 +149,45 @@ public class Register extends AppCompatActivity {
         userInfo.setPostAddress(post);
         userInfo.setPassword(password);
 
-        // which is called with database reference.
-        // get a reference to the "Users" node in the database
+        // Get a reference to the "Users" node in the database
         DatabaseReference usersRef = firebaseDatabase.getReference("Users");
-        // generate a new unique key for the user node using the push() method
-        String userId = usersRef.push().getKey();
-        // save the user data under the new key
-        usersRef.child(userId).setValue(userInfo);
 
-        Toast.makeText(Register.this, "Registration completed successfully!", Toast.LENGTH_SHORT).show();
+        // Check if the email is already in use
+        Query emailQuery = usersRef.orderByChild("email").equalTo(email);
+        emailQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    editText_email.setError("This email is already in use!");
+                } else {
+                    // Check if the phone number is already in use
+                    Query phoneQuery = usersRef.orderByChild("phone").equalTo(phone);
+                    phoneQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                editText_phone.setError("This phone number is already in use!");
+                            } else {
+                                // Save the user data under a new key
+                                String userId = usersRef.push().getKey();
+                                usersRef.child(userId).setValue(userInfo);
+                                Toast.makeText(Register.this, "Registration completed successfully!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Handle error
+            }
+        });
 
     }
 }

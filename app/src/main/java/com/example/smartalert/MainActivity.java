@@ -1,5 +1,6 @@
 package com.example.smartalert;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +17,11 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Locale;
 
@@ -26,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
     
     private Button button;
     private EditText editText_username, editText_password;
-    FirebaseAuth mAuth;
-    FirebaseDatabase database;
+    FirebaseAuth firebaseAuth;
+    FirebaseDatabase firebaseDatabase;
     DatabaseReference reference;
 
     @Override
@@ -55,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 if(email.isEmpty() || pass.isEmpty()){
                     Toast.makeText(MainActivity.this, "To log in please fill the fields",Toast.LENGTH_LONG).show();
                 }else{
-                    signIn();
+                    signIn(email,pass);
                     startActivity(intent);
                 }
             }
@@ -121,17 +125,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Sign in
-    public void signIn(){
-        mAuth.signInWithEmailAndPassword(editText_username.getText().toString(),editText_password.getText().toString())
-                .addOnCompleteListener((task)->{
-                    if(task.isSuccessful()){
-                        showMessage("Success!","Ok");
-                    }else {
-                        showMessage("Error",task.getException().getLocalizedMessage());
+    private void signIn(String email, String password) {
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        // Get a reference to the user's data in the database
+                        DatabaseReference userRef = firebaseDatabase.getReference("Users")
+                                .child(firebaseAuth.getCurrentUser().getUid());
+                        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                // Retrieve the user data and display it in the app
+                                UserInfo user = dataSnapshot.getValue(UserInfo.class);
+                                // TODO: Display the user's data in the app
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                // Handle error
+                            }
+                        });
+                    } else {
+                        Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
-    void showMessage(String title, String message){
-        new AlertDialog.Builder(this).setTitle(title).setMessage(message).setCancelable(true).show();
-    }
+
 }
