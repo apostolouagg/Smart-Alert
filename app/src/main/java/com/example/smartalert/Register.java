@@ -13,8 +13,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,6 +26,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
 
 public class Register extends AppCompatActivity {
 
@@ -100,7 +105,9 @@ public class Register extends AppCompatActivity {
             }
         });
     }
-
+    void showMessage(String title, String message) {
+        new AlertDialog.Builder(this).setTitle(title).setMessage(message).setCancelable(true).show();
+    }
     //Check the all the fields
     private TextWatcher logintextWatcher = new TextWatcher() {
         @Override
@@ -171,6 +178,18 @@ public class Register extends AppCompatActivity {
                                 // Save the user data under a new key
                                 String userId = usersRef.push().getKey();
                                 usersRef.child(userId).setValue(userInfo);
+                                //We need this when the user wants to login after the registration
+                                mAuth.createUserWithEmailAndPassword(email.toString(),password.toString())
+                                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                if(task.isSuccessful()){
+                                                    Toast.makeText(Register.this, "User authenticated", Toast.LENGTH_SHORT).show();
+                                                }else {
+                                                    Toast.makeText(Register.this, "Error", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
                                 Toast.makeText(Register.this, "Registration completed successfully!", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -178,16 +197,13 @@ public class Register extends AppCompatActivity {
                         public void onCancelled(@NonNull DatabaseError error) {
 
                         }
-
                     });
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 // Handle error
             }
         });
-
     }
 }

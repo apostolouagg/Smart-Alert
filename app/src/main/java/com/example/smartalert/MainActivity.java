@@ -1,6 +1,5 @@
 package com.example.smartalert;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,7 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.Locale;
-
 
 public class MainActivity extends AppCompatActivity {
     
@@ -59,13 +57,12 @@ public class MainActivity extends AppCompatActivity {
                 if(email.isEmpty() || pass.isEmpty()){
                     Toast.makeText(MainActivity.this, "To log in please fill the fields",Toast.LENGTH_LONG).show();
                 }else{
-                    signIn(email,pass);
+                    signIn();
                 }
             }
         });
 
         //Open Registration
-
         button = (Button) findViewById(R.id.button_sign_up);
         Intent intent2 = new Intent(this, Register.class);
 
@@ -91,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                     recreate();
                 }
                 else if(i==1){
-                    //Choose English
+                    //Choose Greek
                     setlocale("gr");
                     recreate();
                 }
@@ -124,40 +121,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Sign in
-    private void signIn(String email, String password) {
+    private void signIn() {
         Intent intent = new Intent(this, LoginUser.class);
-        firebaseAuth.signInWithEmailAndPassword(email, password)
+        firebaseAuth.signInWithEmailAndPassword(editText_email.getText().toString(), editText_password.getText().toString())
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        startActivity(intent);
                         // Link the Firebase Authentication user account with the user data in the Firebase Realtime Database
-                        firebaseDatabase.getReference("Users")
-                                .child(firebaseAuth.getCurrentUser().getUid())
-                                .child("authUid")
-                                .setValue(firebaseAuth.getCurrentUser().getUid());
-
                         // Opens the new AppActivity (LoginUser)
                         startActivity(intent);
-
-                        // Get a reference to the user's data in the database
-                        DatabaseReference userRef = firebaseDatabase.getReference("Users")
-                                .child(firebaseAuth.getCurrentUser().getUid());
-                        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                // Retrieve the user data and display it in the app
-                                UserInfo user = dataSnapshot.getValue(UserInfo.class);
-                                // TODO: Display the user's data in the app
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                                // Handle error
-                            }
-                        });
                     } else {
-                        Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "The email or the password is wrong.", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
