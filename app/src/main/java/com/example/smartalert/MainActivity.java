@@ -29,38 +29,37 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     
     private Button button;
-    private EditText editText_username, editText_password;
+    private EditText editText_email, editText_password;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
-    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+
         loadLocale();
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(getResources().getString(R.string.app_name));
 
         //Sign in Account
-
-        editText_username = (EditText) findViewById(R.id.text_username);
+        editText_email = (EditText) findViewById(R.id.text_email);
         editText_password = (EditText) findViewById(R.id.text_password);
 
         button = (Button) findViewById(R.id.button_sign_in);
-        Intent intent = new Intent(this, LoginUser.class);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                String email = editText_username.getText().toString().trim();
+                String email = editText_email.getText().toString().trim();
                 String pass = editText_password.getText().toString().trim();
                 if(email.isEmpty() || pass.isEmpty()){
                     Toast.makeText(MainActivity.this, "To log in please fill the fields",Toast.LENGTH_LONG).show();
                 }else{
                     signIn(email,pass);
-                    startActivity(intent);
                 }
             }
         });
@@ -126,9 +125,20 @@ public class MainActivity extends AppCompatActivity {
 
     //Sign in
     private void signIn(String email, String password) {
+        Intent intent = new Intent(this, LoginUser.class);
         firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
+                        startActivity(intent);
+                        // Link the Firebase Authentication user account with the user data in the Firebase Realtime Database
+                        firebaseDatabase.getReference("Users")
+                                .child(firebaseAuth.getCurrentUser().getUid())
+                                .child("authUid")
+                                .setValue(firebaseAuth.getCurrentUser().getUid());
+
+                        // Opens the new AppActivity (LoginUser)
+                        startActivity(intent);
+
                         // Get a reference to the user's data in the database
                         DatabaseReference userRef = firebaseDatabase.getReference("Users")
                                 .child(firebaseAuth.getCurrentUser().getUid());
@@ -151,5 +161,4 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-
 }

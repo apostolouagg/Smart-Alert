@@ -9,7 +9,6 @@
     <string name="welcome">Welcome</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign up</string>
-    <string name="username_login">Username</string>
     <string name="password_login">password</string>
     <string name="Language">Language</string>
 </resources>
