@@ -1,5 +1,6 @@
 package com.example.smartalert;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,12 +16,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.Locale;
 
@@ -122,16 +123,32 @@ public class MainActivity extends AppCompatActivity {
 
     //Sign in
     private void signIn() {
-        Intent intent = new Intent(this, LoginUser.class);
-        firebaseAuth.signInWithEmailAndPassword(editText_email.getText().toString(), editText_password.getText().toString())
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        // Link the Firebase Authentication user account with the user data in the Firebase Realtime Database
-                        // Opens the new AppActivity (LoginUser)
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(this, "The email or the password is wrong.", Toast.LENGTH_SHORT).show();
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(editText_email.getText().toString(), editText_password.getText().toString())
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, check if email ends with "@gov.gr"
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            if (user != null) {
+                                String email = user.getEmail();
+                                if (email.endsWith("@gov.gr")) {
+                                    // Email ends with "@gov.gr", open employer activity
+                                    Intent intent = new Intent(MainActivity.this, LoginEmployer.class);
+                                    startActivity(intent);
+                                } else {
+                                    // Email does not end with "@gov.gr", open user activity
+                                    Intent intent = new Intent(MainActivity.this, LoginUser.class);
+                                    startActivity(intent);
+                                }
+                            }
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Toast.makeText(MainActivity.this, "Email or password is wrong.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
+
     }
 }
