@@ -11,54 +11,53 @@
         android:id="@+id/button_LogOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="6dp"
         android:text="Log out"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
-        app:layout_constraintEnd_toStartOf="@+id/textView_Welcomeback"
-        app:layout_constraintStart_toStartOf="@+id/textView_Welcomeback" />
+        app:layout_constraintEnd_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/textView_Welcomeback" />
 
     <TextView
         android:id="@+id/textView_flood"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="11dp"
         android:text="Flood"
         android:textColor="@color/purple_500"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@+id/imageButton_flood"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton_earthquake" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton_fire" />
 
     <TextView
         android:id="@+id/textView_earthquake"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="6dp"
         android:text="earthquake"
         android:textColor="@color/purple_500"
         android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@+id/imageButton_earthquake"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton_something_else"
         app:layout_constraintTop_toBottomOf="@+id/imageButton_earthquake" />
 
     <TextView
         android:id="@+id/textView_tornado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:layout_marginEnd="17dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="115dp"
         android:text="Tornado"
         android:textColor="@color/purple_500"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton_hurricane"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton_hurricane" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton_hurricane" />
 
     <TextView
         android:id="@+id/textView_something_else"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="9dp"
         android:text="Something\n       else"
         android:textColor="@color/purple_500"
         android:textSize="16sp"
@@ -69,47 +68,49 @@
         android:id="@+id/textView_weather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="9dp"
-        android:layout_marginBottom="55dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginEnd="12dp"
         android:text="Εxtreme \nweather \nconditions"
         android:textColor="@color/purple_500"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton_weather" />
+        app:layout_constraintEnd_toEndOf="@+id/imageButton_weather"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton_weather" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="185dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="11dp"
         android:text="Report an incident:"
         android:textColor="@color/purple_500"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/button_LogOut" />
 
     <ImageButton
         android:id="@+id/imageButton_fire"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="29dp"
-        android:layout_marginEnd="26dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="30dp"
         android:contentDescription="@string/Language"
         android:scaleType="fitCenter"
         android:src="@drawable/fire"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton_flood"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_fire"
         app:layout_constraintEnd_toStartOf="@+id/imageButton_flood"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageButton_flood" />
+        app:layout_constraintTop_toTopOf="@+id/textView4" />
 
     <ImageButton
         android:id="@+id/imageButton_flood"
         android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="43dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="34dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="30dp"
         android:contentDescription="@string/Language"
         android:scaleType="fitCenter"
         android:src="@drawable/flood"
@@ -121,22 +122,22 @@
     <ImageButton
         android:id="@+id/imageButton_earthquake"
         android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="226dp"
-        android:layout_marginEnd="33dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="37dp"
         android:contentDescription="@string/Language"
         android:scaleType="fitCenter"
         android:src="@drawable/earthquake"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton_flood"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageButton_flood"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/imageButton_flood" />
 
     <ImageButton
         android:id="@+id/imageButton_hurricane"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="29dp"
-        android:layout_marginEnd="26dp"
+        android:layout_marginEnd="25dp"
         android:contentDescription="@string/Language"
         android:scaleType="fitCenter"
         android:src="@drawable/hurricane"
@@ -148,53 +149,55 @@
     <ImageButton
         android:id="@+id/imageButton_weather"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="13dp"
+        android:layout_height="117dp"
+        android:layout_marginTop="43dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="43dp"
         android:contentDescription="@string/Language"
         android:scaleType="fitCenter"
         android:src="@drawable/weather"
-        app:layout_constraintBottom_toTopOf="@+id/textView_weather"
+        app:layout_constraintBottom_toBottomOf="@+id/textView_tornado"
         app:layout_constraintEnd_toStartOf="@+id/imageButton_something_else"
         app:layout_constraintStart_toEndOf="@+id/imageButton_hurricane"
-        app:layout_constraintTop_toBottomOf="@+id/textView_flood" />
+        app:layout_constraintTop_toBottomOf="@+id/imageButton_flood" />
 
     <ImageButton
         android:id="@+id/imageButton_something_else"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginEnd="33dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="2dp"
         android:contentDescription="@string/Language"
         android:scaleType="fitCenter"
         android:src="@drawable/something_else"
         app:layout_constraintBottom_toBottomOf="@+id/imageButton_weather"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageButton_weather"
-        app:layout_constraintTop_toTopOf="@+id/imageButton_weather" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_earthquake" />
 
     <TextView
         android:id="@+id/textView_fire"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="34dp"
-        android:layout_marginTop="13dp"
         android:text="Fire"
         android:textColor="@color/purple_500"
         android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/imageButton_fire"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton_fire" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView_Welcomeback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="31dp"
         android:text="Welcome User"
         android:textColor="@color/purple_500"
         android:textSize="34sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/button_LogOut"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

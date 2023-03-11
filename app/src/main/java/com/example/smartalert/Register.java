@@ -26,7 +26,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-
 public class Register extends AppCompatActivity {
 
     private EditText editText_username, editText_password, editText_email, editText_phone, editText_postAddress;
@@ -130,6 +129,9 @@ public class Register extends AppCompatActivity {
             }
             else if(passwordInput.length()<6){
                 editText_password.setError("Your password must be greater than 5 digits!");
+            }
+            else if (emailInput.endsWith("@gov.gr")){
+                editText_email.setError("You can't register gov.gr email");
             }
             else {
                 button_confirm.setOnClickListener(view -> signUp(usernameInput,emailInput,phoneInput,postAddressInput,passwordInput));

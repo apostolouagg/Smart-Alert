@@ -48,6 +48,13 @@ public class MainActivity extends AppCompatActivity {
         editText_email = (EditText) findViewById(R.id.text_email);
         editText_password = (EditText) findViewById(R.id.text_password);
 
+        // Check if user is already logged in
+        FirebaseUser currentUser =  firebaseAuth.getCurrentUser();
+        if (currentUser != null) {
+            Intent intent = new Intent(MainActivity.this, LoginUser.class);
+            startActivity(intent);
+            finish();
+        }
         button = (Button) findViewById(R.id.button_sign_in);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,5 +157,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Exit the app
+        finishAffinity();
     }
 }

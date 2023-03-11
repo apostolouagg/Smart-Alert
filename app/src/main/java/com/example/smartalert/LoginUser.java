@@ -1,22 +1,40 @@
 package com.example.smartalert;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class LoginUser extends AppCompatActivity {
 
+    public Button button_logOut;
     public ImageButton b1, b2, b3, b4, b5, b6;
     public TextView one, two, three, four, five, six;
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_user);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        button_logOut = (Button) findViewById(R.id.button_LogOut);
+        button_logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                confirmLogOut();
+            }
+        });
 
         b1 = (ImageButton) findViewById(R.id.imageButton_fire);
         b2 = (ImageButton) findViewById(R.id.imageButton_flood);
@@ -110,4 +128,30 @@ public class LoginUser extends AppCompatActivity {
             }
         });
     }
+    private void confirmLogOut() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to log out?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        mAuth.signOut();
+                        Intent intent = new Intent(LoginUser.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Do nothing
+    }
+
 }
