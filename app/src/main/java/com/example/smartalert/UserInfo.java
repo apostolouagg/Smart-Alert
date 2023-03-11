@@ -2,17 +2,24 @@ package com.example.smartalert;
 
 public class UserInfo {
 
-    private String username, email, phone, postAddress, password;
+    private String name, email, phone, lastname, password;
 
     //Empty Constructor for the realtimeDB
     public UserInfo(){}
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -31,13 +38,6 @@ public class UserInfo {
         this.phone = phone;
     }
 
-    public String getPostAddress() {
-        return postAddress;
-    }
-
-    public void setPostAddress(String postAddress) {
-        this.postAddress = postAddress;
-    }
 
     public String getPassword() {
         return password;

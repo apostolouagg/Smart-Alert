@@ -17,12 +17,11 @@
         android:layout_marginStart="62dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="62dp"
-        android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="@string/username"
+        android:hint="First Name"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toTopOf="@+id/text_Email"
+        app:layout_constraintBottom_toTopOf="@+id/text_Lastname"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,46 +30,44 @@
         android:id="@+id/text_Email"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="62dp"
-        android:layout_marginEnd="62dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="@string/e_mail"
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/text_Phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_Name" />
+        app:layout_constraintEnd_toEndOf="@+id/text_Lastname"
+        app:layout_constraintStart_toStartOf="@+id/text_Phone"
+        app:layout_constraintTop_toBottomOf="@+id/text_Lastname" />
 
     <EditText
         android:id="@+id/text_Phone"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="62dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginStart="63dp"
+        android:layout_marginEnd="59dp"
+        android:layout_marginBottom="9dp"
         android:ems="10"
         android:hint="@string/phone_number"
         android:inputType="phone"
-        app:layout_constraintBottom_toTopOf="@+id/text_PostAddress"
-        app:layout_constraintEnd_toEndOf="@+id/text_Email"
+        app:layout_constraintBottom_toTopOf="@+id/text_Password"
+        app:layout_constraintEnd_toEndOf="@+id/text_Password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_Email" />
 
     <EditText
-        android:id="@+id/text_PostAddress"
+        android:id="@+id/text_Lastname"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="62dp"
-        android:layout_marginEnd="63dp"
-        android:layout_marginBottom="13dp"
+        android:layout_marginStart="61dp"
+        android:layout_marginEnd="61dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="@string/post_address"
+        android:hint="Last Name"
         android:inputType="textPostalAddress"
-        app:layout_constraintBottom_toTopOf="@+id/text_Password"
-        app:layout_constraintEnd_toEndOf="@+id/text_Password"
+        app:layout_constraintBottom_toTopOf="@+id/text_Email"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_Phone" />
+        app:layout_constraintTop_toBottomOf="@+id/text_Name" />
 
     <EditText
         android:id="@+id/text_Password"
@@ -78,7 +75,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="62dp"
         android:layout_marginEnd="62dp"
-        android:layout_marginBottom="27dp"
+        android:layout_marginBottom="45dp"
         android:drawableRight="@drawable/ic_baseline_visibility_off_24"
         android:ems="10"
         android:hint="@string/password"
@@ -87,7 +84,7 @@
         app:layout_constraintBottom_toTopOf="@+id/button_register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_PostAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/text_Phone" />
 
     <Button
         android:id="@+id/button_register"

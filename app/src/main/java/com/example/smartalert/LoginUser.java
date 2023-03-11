@@ -1,5 +1,6 @@
 package com.example.smartalert;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +13,12 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginUser extends AppCompatActivity {
 
@@ -33,6 +40,25 @@ public class LoginUser extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 confirmLogOut();
+            }
+        });
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String uid = user.getUid();
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users").child(uid);
+
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String firstName = dataSnapshot.child("firstName").getValue(String.class);
+                TextView welcomeMessage = findViewById(R.id.textView_Welcomeback);
+                welcomeMessage.setText("Welcome " + firstName);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle errors here
             }
         });
 
@@ -151,7 +177,9 @@ public class LoginUser extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // Do nothing
+        confirmLogOut();
     }
+
+
 
 }

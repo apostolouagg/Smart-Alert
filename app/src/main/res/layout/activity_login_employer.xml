@@ -34,19 +34,28 @@
         android:id="@+id/button_Report"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="25dp"
         android:text="Report Incident"
-        app:layout_constraintBottom_toBottomOf="@+id/textView_ChooseActivity"
-        app:layout_constraintStart_toEndOf="@+id/textView_ChooseActivity"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_ChooseActivity" />
 
     <Button
         android:id="@+id/button_Messages"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="11dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="17dp"
         android:text="Messages"
-        app:layout_constraintStart_toStartOf="@+id/button_Report"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_Report" />
+
+    <Button
+        android:id="@+id/button_LogOut_Employer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="Log out"
+        app:layout_constraintStart_toStartOf="@+id/button_Messages"
+        app:layout_constraintTop_toBottomOf="@+id/button_Messages" />
 </androidx.constraintlayout.widget.ConstraintLayout>

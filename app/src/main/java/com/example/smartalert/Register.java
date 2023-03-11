@@ -28,7 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Register extends AppCompatActivity {
 
-    private EditText editText_username, editText_password, editText_email, editText_phone, editText_postAddress;
+    private EditText editText_name, editText_lastname , editText_password, editText_email, editText_phone;
     private Button button_confirm;
     boolean passwordVisible;
 
@@ -50,18 +50,18 @@ public class Register extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        editText_username = findViewById(R.id.text_Name);
+        editText_name = findViewById(R.id.text_Name);
         editText_password = findViewById(R.id.text_Password);
         editText_email = findViewById(R.id.text_Email);
         editText_phone = findViewById(R.id.text_Phone);
-        editText_postAddress = findViewById(R.id.text_PostAddress);
+        editText_lastname = findViewById(R.id.text_Lastname);
         button_confirm = findViewById(R.id.button_register);
 
-        editText_username.addTextChangedListener(logintextWatcher);
+        editText_name.addTextChangedListener(logintextWatcher);
         editText_password.addTextChangedListener(logintextWatcher);
         editText_email.addTextChangedListener(logintextWatcher);
         editText_phone.addTextChangedListener(logintextWatcher);
-        editText_postAddress.addTextChangedListener(logintextWatcher);
+        editText_lastname.addTextChangedListener(logintextWatcher);
 
 
         // below line is used to get the
@@ -109,23 +109,23 @@ public class Register extends AppCompatActivity {
         public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            String usernameInput = editText_username.getText().toString().trim();
+            String nameInput = editText_name.getText().toString().trim();
             String emailInput = editText_email.getText().toString().trim();
             String passwordInput = editText_password.getText().toString().trim();
             String phoneInput = editText_phone.getText().toString().trim();
-            String postAddressInput = editText_postAddress.getText().toString().trim();
+            String lastnameInput = editText_lastname.getText().toString().trim();
 
-            if (usernameInput.length() > 25){
-                editText_username.setError("The username is too long!");
+            if (nameInput.length() > 15){
+                editText_name.setError("The name is too long!");
+            }
+            else if(lastnameInput.length() > 20){
+                editText_lastname.setError("The last name is too long!");
             }
             else if(!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()){
                 editText_email.setError("Invalid email!");
             }
             else if(phoneInput.length() != 10){
                 editText_phone.setError("The phone number must be 10 digits!");
-            }
-            else if(postAddressInput.length() != 5){
-                editText_postAddress.setError("The post address must be 5 digits!");
             }
             else if(passwordInput.length()<6){
                 editText_password.setError("Your password must be greater than 5 digits!");
@@ -134,7 +134,7 @@ public class Register extends AppCompatActivity {
                 editText_email.setError("You can't register gov.gr email");
             }
             else {
-                button_confirm.setOnClickListener(view -> signUp(usernameInput,emailInput,phoneInput,postAddressInput,passwordInput));
+                button_confirm.setOnClickListener(view -> signUp(nameInput,emailInput,phoneInput,lastnameInput,passwordInput));
             }
         }
         @Override
@@ -142,11 +142,11 @@ public class Register extends AppCompatActivity {
     };
 
     //sign Up
-    private void signUp(String name, String email, String phone, String post, String password) {
-        userInfo.setUsername(name);
+    private void signUp(String name, String email, String phone, String lastname, String password) {
+        userInfo.setName(name);
         userInfo.setEmail(email);
         userInfo.setPhone(phone);
-        userInfo.setPostAddress(post);
+        userInfo.setLastname(lastname);
         userInfo.setPassword(password);
 
         // Get a reference to the "Users" node in the database
