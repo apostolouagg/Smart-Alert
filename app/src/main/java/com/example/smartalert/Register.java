@@ -7,7 +7,6 @@ import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Patterns;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -79,30 +78,27 @@ public class Register extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        editText_password.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                final int Right = 2;
-                if(motionEvent.getAction()== MotionEvent.ACTION_UP){
-                    if(motionEvent.getRawX()>=editText_password.getRight()-editText_password.getCompoundDrawables()[Right].getBounds().width()){
-                        int selection = editText_password.getSelectionEnd();
-                        //Hide password
-                        if(passwordVisible){
-                            editText_password.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_baseline_visibility_off_24,0);
-                            editText_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                            passwordVisible = false;
-                        //Show password
-                        }else{
-                            editText_password.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_baseline_visibility_24,0);
-                            editText_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                            passwordVisible = true;
-                        }
-                        editText_password.setSelection(selection);
-                        return true;
+        editText_password.setOnTouchListener((view, motionEvent) -> {
+            final int Right = 2;
+            if(motionEvent.getAction()== MotionEvent.ACTION_UP){
+                if(motionEvent.getRawX()>=editText_password.getRight()-editText_password.getCompoundDrawables()[Right].getBounds().width()){
+                    int selection = editText_password.getSelectionEnd();
+                    //Hide password
+                    if(passwordVisible){
+                        editText_password.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_baseline_visibility_off_24,0);
+                        editText_password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                        passwordVisible = false;
+                    //Show password
+                    }else{
+                        editText_password.setCompoundDrawablesRelativeWithIntrinsicBounds(0,0, R.drawable.ic_baseline_visibility_24,0);
+                        editText_password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                        passwordVisible = true;
                     }
+                    editText_password.setSelection(selection);
+                    return true;
                 }
-                return false;
             }
+            return false;
         });
     }
     void showMessage(String title, String message) {
@@ -136,12 +132,7 @@ public class Register extends AppCompatActivity {
                 editText_password.setError("Your password must be greater than 5 digits!");
             }
             else {
-                button_confirm.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        signUp(usernameInput,emailInput,phoneInput,postAddressInput,passwordInput);
-                    }
-                });
+                button_confirm.setOnClickListener(view -> signUp(usernameInput,emailInput,phoneInput,postAddressInput,passwordInput));
             }
         }
         @Override
