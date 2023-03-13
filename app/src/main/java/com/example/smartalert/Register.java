@@ -115,6 +115,7 @@ public class Register extends AppCompatActivity {
             String phoneInput = editText_phone.getText().toString().trim();
             String lastnameInput = editText_lastname.getText().toString().trim();
 
+            
             if (nameInput.length() > 15){
                 editText_name.setError("The name is too long!");
             }
