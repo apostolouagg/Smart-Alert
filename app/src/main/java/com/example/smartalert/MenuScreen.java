@@ -24,8 +24,8 @@ import java.util.Locale;
 
 public class MenuScreen extends AppCompatActivity {
     
-    private Button button;
-    private EditText editText_email, editText_password;
+    Button button;
+    EditText editText_email, editText_password;
     boolean passwordVisible;
     FirebaseAuth firebaseAuth;
     FirebaseDatabase firebaseDatabase;
