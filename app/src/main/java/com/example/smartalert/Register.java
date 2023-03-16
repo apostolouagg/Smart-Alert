@@ -28,8 +28,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Register extends AppCompatActivity {
 
-    private EditText editText_name, editText_lastname , editText_password, editText_email, editText_phone;
-    private Button button_confirm;
+    EditText editText_name, editText_lastname , editText_password, editText_email, editText_phone;
+    Button button_confirm;
     boolean passwordVisible;
 
     FirebaseAuth mAuth;
@@ -110,12 +110,11 @@ public class Register extends AppCompatActivity {
         @Override
         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
             String nameInput = editText_name.getText().toString().trim();
+            String lastnameInput = editText_lastname.getText().toString().trim();
             String emailInput = editText_email.getText().toString().trim();
             String passwordInput = editText_password.getText().toString().trim();
             String phoneInput = editText_phone.getText().toString().trim();
-            String lastnameInput = editText_lastname.getText().toString().trim();
 
-            
             if (nameInput.length() > 15){
                 editText_name.setError("The name is too long!");
             }

@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginEmployer">
+    android:background="@drawable/background"
+    tools:context=".LoginEmployee">
 
     <TextView
-        android:id="@+id/textView_WelcomeEmployer"
+        android:id="@+id/textView_WelcomeEmployee"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Welcome Employer"
+        android:text="Welcome Employee"
         android:textColor="@color/purple_500"
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +29,7 @@
         android:textColor="@color/purple_500"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_WelcomeEmployer" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_WelcomeEmployee" />
 
     <Button
         android:id="@+id/button_Report"
@@ -36,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
         android:layout_marginTop="25dp"
+        android:background="#7E57C2"
         android:text="Report Incident"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_ChooseActivity" />
@@ -46,6 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="26dp"
         android:layout_marginTop="17dp"
+        android:background="#7E57C2"
         android:text="Messages"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_Report" />
@@ -55,6 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="14dp"
+        android:background="#7E57C2"
         android:text="Log out"
         app:layout_constraintStart_toStartOf="@+id/button_Messages"
         app:layout_constraintTop_toBottomOf="@+id/button_Messages" />
