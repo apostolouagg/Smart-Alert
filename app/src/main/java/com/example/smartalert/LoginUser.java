@@ -27,8 +27,7 @@ public class LoginUser extends AppCompatActivity {
     public ImageButton b1, b2, b3, b4, b5, b6;
     public TextView one, two, three, four, five, six, textView_welcome;
     private FirebaseAuth mAuth;
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
